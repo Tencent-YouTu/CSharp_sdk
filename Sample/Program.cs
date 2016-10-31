@@ -11,10 +11,10 @@ namespace Sample
         static void Main(string[] args)
         {
             // 设置为你自己的密钥对
-            string appid = "1006935";
-            string secretId = "AKIDmtnfLVH3DoWpn5yOIdu5jG5alHacadvt";
-            string secretKey = "lmHyGzfLibqK5NAZSQ7dcIYNN72dEOtF";
-            string userid = "380549494";
+            string appid = "";
+            string secretId = "";
+            string secretKey = "";
+            string userid = "";
 
 
 
