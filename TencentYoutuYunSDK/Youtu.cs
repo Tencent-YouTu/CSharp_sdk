@@ -790,9 +790,132 @@ namespace TencentYoutuYun.SDK.Csharp
             return result;
         }
 
+        /// <summary>
+        /// 根据用户上传的行驶证，驾驶证照片，识别并且获取相应的详细信息
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <param name="type">识别类型，0-行驶证，1-驾驶证</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string driverlicenseocr(string image_path, int type)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/driverlicenseocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\",\"type\":{2}";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path), type);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户上传的行驶证，驾驶证照片，识别并且获取相应的详细信息
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <param name="type">图片类型，0-行驶证，1-驾驶证</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string driverlicenseocrurl(string url, int type)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/driverlicenseocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\",\"type\":{2}";
+            pars = string.Format(pars, Conf.Instance().APPID, url, type);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户上传的名片照片，识别并且获取相应的详细信息
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string bcocr(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/bcocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户上传的名片照片，识别并且获取相应的详细信息
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string bcocrurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/bcocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户上传的照片，识别并且获取图片中的文字信息
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string generalocr(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/generalocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户上传的照片，识别并且获取图片中的文字信息
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string generalocrurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/generalocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
         #endregion
 
         #endregion
 
     }
 }
+
