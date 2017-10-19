@@ -717,7 +717,7 @@ namespace TencentYoutuYun.SDK.Csharp
             string methodName = "youtu/ocrapi/idcardocr";
             StringBuilder postData = new StringBuilder();
 
-            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\",\"card_type\":\"{2}\"";
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\",\"card_type\":{2}";
             pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path),card_type);
             postData.Append("{");
             postData.Append(pars);
@@ -738,7 +738,7 @@ namespace TencentYoutuYun.SDK.Csharp
             string methodName = "youtu/ocrapi/idcardocr";
             StringBuilder postData = new StringBuilder();
 
-            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\",\"card_type\":\"{2}\"";
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\",\"card_type\":{2}";
             pars = string.Format(pars, Conf.Instance().APPID,url,card_type);
             postData.Append("{");
             postData.Append(pars);
