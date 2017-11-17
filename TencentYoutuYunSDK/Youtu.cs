@@ -747,28 +747,6 @@ namespace TencentYoutuYun.SDK.Csharp
             return result;
         }
 
-
-        /// <summary>
-        /// 名片OCR识别
-        /// </summary>
-        /// <param name="image_path">图片路径</param>
-        /// <param name="retimage ">是否需要返回处理结果图,true 返回，false 不返回</param>
-        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
-        public static string namecardocr(string image_path, bool retimage)
-        {
-            string expired = Utility.UnixTime(EXPIRED_SECONDS);
-            string methodName = "youtu/ocrapi/namecardocr";
-            StringBuilder postData = new StringBuilder();
-
-            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\",\"retimage\":\"{2}\"";
-            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path), retimage);
-            postData.Append("{");
-            postData.Append(pars);
-            postData.Append("}");
-            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
-            return result;
-        }
-
         /// <summary>
         /// 名片OCR识别
         /// </summary>
