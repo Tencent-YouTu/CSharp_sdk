@@ -10,7 +10,6 @@ namespace TencentYoutuYun.SDK.Csharp
     {
         const string PKG_VERSION = "1.0.*";
         public string YOUTU_END_POINT { get { return "http://api.youtu.qq.com/"; } }
-        public string TENCENTYUN_END_POINT { get { return "https://youtu.api.qcloud.com/"; } }
 
         // 请到 open.youtu.qq.com查看您对应的appid相关信息并填充
         // 请统一 通过 setAppInfo 设置 
