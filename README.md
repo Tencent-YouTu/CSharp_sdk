@@ -1,6 +1,6 @@
 # TencentYoutuyun-person-face-service
 
-CSharp sdk for [腾讯云智能优图服务](http://www.qcloud.com/product/fr.html) & [腾讯优图开放平台](http://open.youtu.qq.com)
+CSharp sdk for [腾讯优图开放平台](http://open.youtu.qq.com)
 
 ### 说明
 
@@ -14,7 +14,7 @@ CSharp sdk for [腾讯云智能优图服务](http://www.qcloud.com/product/fr.ht
 - `AppId` 平台添加应用后分配的AppId
 - `SecretId` 平台添加应用后分配的SecretId
 - `SecretKey` 平台添加应用后分配的SecretKey
-- `签名` 接口鉴权凭证，由`AppId`、`SecretId`、`SecretKey`等生成，详见<http://open.YouTu::qq.com/welcome/authentication>
+- `签名` 接口鉴权凭证，由`AppId`、`SecretId`、`SecretKey`等生成，详见<http://open.youtu.qq.com/#/develop/tool-authentication>
 
 ### 使用示例
 
