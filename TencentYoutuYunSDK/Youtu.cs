@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using TencentYoutuYun.SDK.Csharp.Common;
 
@@ -272,6 +273,49 @@ namespace TencentYoutuYun.SDK.Csharp
             postData.Append("{");
             postData.Append(pars);
             postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 多人脸检索 multifaceidentify
+        /// </summary>
+        /// <param name="image_path">待识别图片路径</param>
+        /// <param name="group_id">识别的组id</param>
+        /// <param name="group_ids">个体存放的组id，可以指定多个组id</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string multifaceidentify(string image_path, string group_id, List<string> group_ids, int topn = 5, int min_size = 40)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/api/multifaceidentify";
+            StringBuilder postData = new StringBuilder();
+            string pars = "\"app_id\":\"{0}\",\"group_id\":\"{1}\",\"group_ids\":{2},\"image\":\"{3}\",\"topn\":{4},\"min_size\":{5}";
+            pars = string.Format(pars, Conf.Instance().APPID, group_id, JsonHelp<string[]>.ToJsonString(group_ids.ToArray()), Utility.ImgBase64(image_path), topn, min_size);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 多人脸检索 multifaceidentifyurl
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <param name="group_id">识别的组id</param>
+        /// <param name="group_ids">个体存放的组id，可以指定多个组id</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string multifaceidentifyurl(string url, string group_id, List<string> group_ids, int topn = 5, int min_size = 40)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/api/faceidentify";
+            StringBuilder postData = new StringBuilder();
+            string pars = "\"app_id\":\"{0}\",\"group_id\":\"{1}\",\"group_ids\":{2},\"url\":\"{3}\",\"topn\":{4},\"min_size\":{5}";
+            pars = string.Format(pars, Conf.Instance().APPID, group_id, JsonHelp<string[]>.ToJsonString(group_ids.ToArray()), url, topn, min_size);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            Console.WriteLine(postData);
             string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
             return result;
         }
@@ -701,6 +745,86 @@ namespace TencentYoutuYun.SDK.Csharp
             return result;
         }
 
+        /// <summary>
+        /// 识别一个图像是否为暴恐图像
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string imageterrorism(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/imageapi/imageterrorism";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 识别一个图像是否为暴恐图像
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string imageterrorismurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/imageapi/imageterrorism";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 自动地检测图片车身以及识别车辆属性
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string carcalssify(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/carapi/carclassify";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 自动地检测图片车身以及识别车辆属性
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string carcalssifyurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/carapi/carclassify";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
         #endregion
 
         #region OCR
@@ -879,6 +1003,126 @@ namespace TencentYoutuYun.SDK.Csharp
         {
             string expired = Utility.UnixTime(EXPIRED_SECONDS);
             string methodName = "youtu/ocrapi/generalocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 银行卡OCR识别，根据用户上传的银行卡图像，返回识别出的银行卡字段信息。
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string creditcardocr(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/creditcardocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 银行卡OCR识别，根据用户上传的银行卡图像，返回识别出的银行卡字段信息。
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string creditcardocrurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/creditcardocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 营业执照OCR 识别，根据用户上传的营业执照图像，返回识别出的注册号、公司名称、地址字段信息
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string bizlicenseocr(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/bizlicenseocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 营业执照OCR 识别，根据用户上传的营业执照图像，返回识别出的注册号、公司名称、地址字段信息
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string bizlicenseocrurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/bizlicenseocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, url);
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 车牌OCR识别，根据用户上传的图像，返回识别出的图片中的车牌号。
+        /// </summary>
+        /// <param name="image_path">图片路径</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string plateocr(string image_path)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/plateocr";
+            StringBuilder postData = new StringBuilder();
+
+            string pars = "\"app_id\":\"{0}\",\"image\":\"{1}\"";
+            pars = string.Format(pars, Conf.Instance().APPID, Utility.ImgBase64(image_path));
+            postData.Append("{");
+            postData.Append(pars);
+            postData.Append("}");
+            string result = Http.HttpPost(methodName, postData.ToString(), Auth.appSign(expired, Conf.Instance().USER_ID));
+            return result;
+        }
+
+        /// <summary>
+        /// 车牌OCR识别，根据用户上传的图像，返回识别出的图片中的车牌号。
+        /// </summary>
+        /// <param name="url">图片的url</param>
+        /// <returns>返回的结果，JSON字符串，字段参见API文档</returns>
+        public static string plateocrurl(string url)
+        {
+            string expired = Utility.UnixTime(EXPIRED_SECONDS);
+            string methodName = "youtu/ocrapi/plateocr";
             StringBuilder postData = new StringBuilder();
 
             string pars = "\"app_id\":\"{0}\",\"url\":\"{1}\"";

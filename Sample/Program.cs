@@ -11,10 +11,10 @@ namespace Sample
         static void Main(string[] args)
         {
             // 设置为你自己的密钥对
-            string appid = "";
-            string secretId = "";
-            string secretKey = "";
-            string userid = "";
+            string appid = "10105350";
+            string secretId = "AKIDdA0iGoRUjx0ru6R5rSH2c1KpNm0WuWyG";
+            string secretKey = "FTWQONCtSWZXN2axAufGhx228JYfeS41";
+            string userid = "993801914";
 
 
 
@@ -44,8 +44,7 @@ namespace Sample
             //Console.ReadKey();
 
             //// 通用OCR
-            //path = System.IO.Directory.GetCurrentDirectory() + "\\icon_ocr_common01.png";
-            //result = Youtu.generalocr(path);
+            //result = Youtu.generalocrurl("http://open.youtu.qq.com/app/img/experience/char_general/ocr_common01.jpg");
             //Console.WriteLine(result);
             //Console.ReadKey();
 
@@ -54,6 +53,28 @@ namespace Sample
             //result = Youtu.driverlicenseocr(path, 0);
             //Console.WriteLine(result);
             //Console.ReadKey();
+
+            List<String> group_ids = new List<string>();
+            result = Youtu.multifaceidentifyurl("http://open.youtu.qq.com/app/img/experience/face_img/face_05.jpg?v=1.0", "test", group_ids, 5, 40);
+            Console.WriteLine(result);
+            //Console.ReadKey();
+
+            result = Youtu.imageterrorismurl("http://open.youtu.qq.com/app/img/experience/terror/img_terror01.jpg");
+            Console.WriteLine(result);
+
+            result = Youtu.carcalssifyurl("http://open.youtu.qq.com/app/img/experience/car/car_01.jpg");
+            Console.WriteLine(result);
+
+            result = Youtu.creditcardocrurl("http://open.youtu.qq.com/app/img/experience/char_general/ocr_card_1.jpg");
+            Console.WriteLine(result);
+
+            result = Youtu.bizlicenseocrurl("http://open.youtu.qq.com/app/img/experience/char_general/ocr_yyzz_01.jpg");
+            Console.WriteLine(result);
+
+            result = Youtu.plateocrurl("http://open.youtu.qq.com/app/img/experience/char_general/ocr_license_1.jpg");
+            Console.WriteLine(result);
+
+            Console.ReadKey();
         }
     }
 }

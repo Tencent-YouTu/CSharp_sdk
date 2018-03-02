@@ -28,7 +28,7 @@ namespace TencentYoutuYun.SDK.Csharp
                 {
                     ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
                     webReq = WebRequest.Create((Conf.Instance().END_POINT + methodName)) as HttpWebRequest;
-                    webReq.ProtocolVersion = HttpVersion.Version10;
+                    webReq.ProtocolVersion = HttpVersion.Version11;
                 }
                 else
                 {
@@ -39,6 +39,9 @@ namespace TencentYoutuYun.SDK.Csharp
                 webReq.Method = "POST";
                 webReq.ContentType = "text/json";
                 webReq.Headers.Add(HttpRequestHeader.Authorization, authorization);
+                webReq.ServicePoint.Expect100Continue = false;
+
+                //webReq.Expect = "100-Continue";
                 webReq.ContentLength = byteArray.Length;
                 Stream newStream = webReq.GetRequestStream();
                 newStream.Write(byteArray, 0, byteArray.Length);//写入参数
